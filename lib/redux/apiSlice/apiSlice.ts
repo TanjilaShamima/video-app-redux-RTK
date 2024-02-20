@@ -32,10 +32,10 @@ export const apiSlice = createApi({
       },
       keepUnusedDataFor: 6
     }),
-    getSingleVideo: builder.query({
+    getSingleVideo: builder.query<VideoType, number>({
       query: (id) => `/videos/${id}`,
     }),
-    getRelatedVideos: builder.query({
+    getRelatedVideos: builder.query<VideoType[], any>({
       query: ({ id, title }) => {
         const limit = 5;
         // ?title_like=javascript&tags_like=react&id!=1

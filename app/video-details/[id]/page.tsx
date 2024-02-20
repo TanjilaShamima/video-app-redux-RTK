@@ -7,14 +7,15 @@ import React, { useEffect } from "react";
 
 const VideoDetailsPage = () => {
   const params = useParams();
-  const id = String(params.id)?.split("%3D")[1];
+  console.log("params", params);
+  //const id = String(params.id)?.split("%3D")[1];
 
   return (
     <div>
       {/* <!-- navigation --> */}
       <Navbar />
 
-      <VideoDetails />
+      <VideoDetails id={Number(params.id)} />
 
       {/* <!-- footer --> */}
       <Footer />
