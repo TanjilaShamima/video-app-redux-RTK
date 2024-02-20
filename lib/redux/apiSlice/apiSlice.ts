@@ -1,3 +1,4 @@
+import { titleQueryMake } from "@/src/utils/appCommonMethods";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export interface VideoType {
   id: number;
@@ -30,7 +31,7 @@ export const apiSlice = createApi({
         console.log("here");
         return "/videos";
       },
-      keepUnusedDataFor: 6
+      keepUnusedDataFor: 6,
     }),
     getSingleVideo: builder.query<VideoType, number>({
       query: (id) => `/videos/${id}`,
@@ -39,16 +40,8 @@ export const apiSlice = createApi({
       query: ({ id, title }) => {
         const limit = 5;
         // ?title_like=javascript&title_like=react&id!=1
-        const tags = title?.split(" ");
-        const queryString = tags
-          ?.map((tag: string, i: number) => {
-            return `title_like=${tag}`;
-          })
-          .join("&");
-
-        const uniqueLimitVideo = `&id_ne=${id}&_limit=${limit}`;
-        const queryAPI = `/videos/?${queryString}${uniqueLimitVideo}`;
-        return queryAPI;
+        const queryString = titleQueryMake(title, limit, id);
+        return queryString;
       },
     }),
   }),
