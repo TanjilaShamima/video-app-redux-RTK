@@ -7,7 +7,6 @@ interface Props {
 }
 
 const VideoPlayer = ({title, link}: Props) => {
-  console.log("link", link);
   return (
     <iframe
       width="100%"

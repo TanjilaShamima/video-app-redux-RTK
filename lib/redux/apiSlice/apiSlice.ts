@@ -38,11 +38,11 @@ export const apiSlice = createApi({
     getRelatedVideos: builder.query<VideoType[], any>({
       query: ({ id, title }) => {
         const limit = 5;
-        // ?title_like=javascript&tags_like=react&id!=1
+        // ?title_like=javascript&title_like=react&id!=1
         const tags = title?.split(" ");
         const queryString = tags
           ?.map((tag: string, i: number) => {
-            return `tags_like=${tag}`;
+            return `title_like=${tag}`;
           })
           .join("&");
 

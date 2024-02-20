@@ -11,10 +11,6 @@ interface Props {
 const VideoDetails = ({ id }: Props) => {
   const { data, isError, isLoading, isSuccess, error } =
     useGetSingleVideoQuery(id);
-
-  console.log("data", id);
-
-  console.log("data", data);
   return (
     <section className="pt-6 pb-20 min-h-[calc(100vh_-_157px)]">
       <div className="mx-auto max-w-7xl px-2 pb-20 min-h-[400px]">
@@ -31,7 +27,9 @@ const VideoDetails = ({ id }: Props) => {
           </div>
 
           {/* <!-- related videos --> */}
-          <RelatedVideo />
+          {isSuccess && (
+            <RelatedVideo title={data.title} id={Number(data.id)} />
+          )}
         </div>
       </div>
     </section>
